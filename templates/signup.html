@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="/static/css/style1.css">
+</head>
+
+<body>
+    <section>
+        <!-- Removed excessive span elements for simplicity -->
+    <form method="post">
+        <div class="login">
+            <div class="box">
+                <h2>Sign In</h2>
+                <div class="formm">
+                    <div class="input-type">
+                        <input type="text" name="username" required>
+                        <i>Username</i>
+                    </div>
+                    <div class="input-type">
+                        <input type="password" name="password" required>
+                        <i>Password</i>
+                    </div>
+                    <div class="link">
+                        <a href="{{ url_for('login') }}">Log in here</a>
+                    </div>
+                    <div class="input-type">
+                        <input type="submit" value="Let's Go">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>    
+    </section>
+</body>
+
+</html>
+

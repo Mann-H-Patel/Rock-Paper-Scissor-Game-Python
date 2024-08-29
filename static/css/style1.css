@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ff6b6b, #f09433, #5a55ae, #00d2ff, #6a11cb); /* Initial gradient */
+    background-size: 300% 300%;
+    font-family: Arial, sans-serif;
+    animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login {
+    width: 350px;
+    background: #333;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.login h2 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.input-type {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input-type input {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background: #444;
+    color: #fff;
+    font-size: 16px;
+}
+
+.input-type i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #bbb;
+    font-size: 14px;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.input-type input:focus ~ i,
+.input-type input:valid ~ i {
+    top: -10px;
+    font-size: 12px;
+    color: #fff;
+}
+
+.link {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.link a {
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.link a:hover {
+    color: #fff;
+    font-weight: bold;
+}
+
+.input-type input[type="submit"] {
+    background: #6a11cb;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.input-type input[type="submit"]:hover {
+    background: #2575fc;
+}
+
+@media (max-width: 600px) {
+    .login {
+        width: 90%;
+        padding: 20px;
+    }
+}
