@@ -20,13 +20,6 @@ class User(db.Model):
     
 def determine_winner(user_choice, computer_choice, user):
     if user.username == "GodOrWhat":
-        # Force the computer to lose
-        if user_choice == "rock":
-            computer_choice = "scissors"
-        elif user_choice == "paper":
-            computer_choice = "rock"
-        elif user_choice == "scissors":
-            computer_choice = "paper"
         a = "win"
     else:
         # Normal game logic
