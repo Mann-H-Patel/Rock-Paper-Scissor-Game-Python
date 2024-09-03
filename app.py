@@ -76,7 +76,7 @@ def play():
         'user_choice': user_choice,
         'computer_choice': computer_choice,
         'result': result,
-        'score': user.score  # Send updated score back to the user
+        'score': user.score
     })
 
 
