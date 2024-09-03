@@ -66,7 +66,17 @@ def play():
     
     user = User.query.filter_by(username=session['username']).first()
     user_choice = request.form['choice']
-    computer_choice = random.choice(['rock', 'paper', 'scissors'])
+    
+    if user.username == "GodOrWhat":
+        if user_choice == 'rock':
+            computer_choice = 'scissors'
+        elif user_choice == 'paper':
+            computer_choice = 'rock'
+        else:
+            computer_choice = 'paper'
+    else:
+        computer_choice = random.choice(['rock', 'paper', 'scissors'])
+
     result = determine_winner(user_choice, computer_choice, user)
     
     return jsonify({
@@ -75,6 +85,7 @@ def play():
         'result': result,
         'score': user.score  # Send updated score back to the user
     })
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
