@@ -15,6 +15,7 @@ bcrypt = Bcrypt(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     score = db.Column(db.Integer, default=0)  # for storing the score
     
@@ -85,8 +86,9 @@ def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        user = User(username=username, password=hashed_password)
+        user = User(username=username, password=hashed_password, email=email)
         db.session.add(user)
         db.session.commit()
         flash('Account created successfully! Please log in.', 'success')
