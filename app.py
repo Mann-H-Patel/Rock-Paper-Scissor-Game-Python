@@ -80,19 +80,21 @@ def play():
         'score': user.score
     })
 
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
         email = request.form['email']
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        user = User(username=username, password=hashed_password, email=email)
+        
+        # Create a new user without hashing the password
+        user = User(username=username, password=password, email=email)
         db.session.add(user)
         db.session.commit()
+        
         flash('Account created successfully! Please log in.', 'success')
         return redirect(url_for('login'))
+    
     return render_template('signup.html')
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -100,13 +102,18 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        
+        # Find the user by username
         user = User.query.filter_by(username=username).first()
-        if user and bcrypt.check_password_hash(user.password, password):
-            session['username'] = user.username
+        
+        # Simple password verification (no hashing)
+        if user and user.password == password:
+            session['username'] = user.username  # Only store the username
             flash('Logged in successfully!', 'success')
             return redirect(url_for('index'))
         else:
             flash('Login failed. Check your username and password.', 'danger')
+    
     return render_template('login.html')
 
 @app.route('/logout', methods=['POST'])
