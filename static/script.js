@@ -6,30 +6,30 @@ async function Mann(choice) {
         button.classList.remove('highlight-red', 'highlight-green');
     });
 
-    let Aman = await fetch('/play', {
-        method: 'post',
+    let response = await fetch('/play', {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: `choice=${choice}`
+        body: `choice=${choice}` // Fixed syntax
     });
 
-    let Mann2 = await Aman.json();
+    let data = await response.json();
 
     // Highlight the user's choice
     document.querySelector(`button[onclick="Mann('${choice}')"]`).classList.add('highlight-red');
 
     // Highlight the computer's choice
-    if (Mann2.computer_choice) {
-        document.querySelector(`button[onclick="Mann('${Mann2.computer_choice}')"]`).classList.add('highlight-green');
+    if (data.computer_choice) {
+        document.querySelector(`button[onclick="Mann('${data.computer_choice}')"]`).classList.add('highlight-green');
     }
 
-    const resultText = `You chose ${Mann2.user_choice}, computer chose ${Mann2.computer_choice}. You ${Mann2.result}!`;
+    const resultText = `You chose ${data.user_choice}, computer chose ${data.computer_choice}. You ${data.result}!`; // Fixed syntax
     document.getElementById('result').innerText = resultText;
 
-    if (Mann2.result === 'win') {
+    if (data.result === 'win') {
         userScore++;
-    } else if (Mann2.result === 'lose') {
+    } else if (data.result === 'lose') {
         computerScore++;
     }
 

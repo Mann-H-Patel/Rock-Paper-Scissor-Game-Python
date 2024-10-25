@@ -1,135 +1,217 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(45deg, #1e3c72, #2a5298);
+    background: linear-gradient(135deg, #2c3e50, #34495e);
     color: #fff;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    text-align: center;
 }
 
-/* Navbar styling */
-.navbar {
-    background-color: #333;
-    overflow: hidden;
-    padding: 10px;
+header {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
     display: flex;
-    justify-content: center;
-}
-
-.navbar a {
-    color: #fff;
-    padding: 14px 20px;
-    text-decoration: none;
-    text-align: center;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-
-.navbar a:hover {
-    background-color: #ddd;
-    color: #333;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
 h1 {
-    font-size: 48px;
-    margin: 20px 0;
-    text-shadow: 2px 2px 4px #000;
+    font-size: 24px;
+    margin: 0;
 }
 
-/* Scoreboard styling */
+.navbar {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a, .btn {
+    padding: 10px 20px; /* Increased padding for larger buttons */
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 16px; /* Consistent font size */
+}
+
+.logout{
+    padding: 10px 20px; /* Increased padding for larger buttons */
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 20px; /* Consistent font size */
+}
+
+.nav-links a:hover, .btn:hover, .logout:hover{
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.welcome {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.welcome-text {
+    font-size: 20px;
+    color: #f39c12; /* Improved color for visibility */
+}
+
 .score-board {
-    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 10px;
-    margin: 20px 0;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 800px;
+    animation: fadeIn 0.5s;
 }
 
-.score-board div {
-    font-size: 24px;
-    margin: 10px 0;
+.score {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px; /* Increased padding */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    flex: 1;
 }
 
-/* Game buttons */
+.score div {
+    font-size: 24px; /* Increased font size for better readability */
+}
+
 .game-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 40px;
     margin: 20px 0;
 }
 
-.game-buttons button {
-    font-size: 20px;
-    padding: 15px 30px;
+.game-btn {
+    font-size: 24px;
+    padding: 20px 40px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
-    background-color: #4caf50;
-    color: white;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    background-color: #3498db;
+    transition: transform 0.3s, background-color 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 150px;
 }
 
-.game-buttons button:hover {
-    transform: translateY(-5px);
+.game-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
 }
 
-/* Welcome section styling */
-.welcome {
-    margin-top: 20px;
+.result-text {
+    font-size: 24px;
+    margin: 20px 0;
+    transition: opacity 0.5s;
+    animation: fadeIn 0.5s;
+    text-align: center; /* Center align the result */
 }
 
-.welcome button {
-    font-size: 18px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
-.welcome button:hover {
-    background-color: #0056b3;
-    transform: translateY(-5px);
-}
-
-/* Footer styling */
-.footer {
-    background-color: #333;
+footer {
+    background-color: rgba(0, 0, 0, 0.7);
     padding: 10px 0;
-    color: white;
     text-align: center;
     margin-top: auto;
 }
 
-.footer p {
+footer p {
     margin: 0;
     font-size: 14px;
 }
 
-/* Animated background */
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://www.transparenttextures.com/patterns/dark-denim.png');
-    opacity: 0.2;
-    z-index: -1;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .welcome {
+        margin-top: 60px;
+    }
+
+    .score-board {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .score {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .game-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .game-btn {
+        width: 100%;
+        margin: 5px 0;
+        font-size: 20px; /* Slightly smaller font for mobile */
+    }
 }
 
-/* Highlight classes */
-.game-buttons .highlight-red {
-    background-color: red;
-    color: white;
-}
-
-.game-buttons .highlight-green {
-    background-color: rgb(0, 21, 255);
-    color: white;
+@media (max-width: 480px) {
+    h1 {
+        font-size: 20px;
+    }
 }

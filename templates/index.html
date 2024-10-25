@@ -6,47 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="/static/css/style4.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
-    </div>
+    <header>
+        <h1>Rock Paper Scissors</h1>
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="{{ url_for('leaderboard') }}" class="btn">Leaderboard</a>
+                {% if username %}
+                <form action="{{ url_for('logout') }}" method="POST" class="logout-form">
+                    <button type="submit" class="logout">Logout</button>
+                </form>
+                {% else %}
+                <a href="{{ url_for('login') }}" class="btn">Login</a>
+                <a href="{{ url_for('signup') }}" class="btn">Sign Up</a>
+                {% endif %}
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                &#9776; <!-- Hamburger Icon -->
+            </div>
+        </nav>
+    </header>
 
-    <h1>Rock Paper Scissors</h1>
-
-    <div class="welcome">
-        {% if username %}
-        <p>Welcome, {{ username }}!</p>
-        <form action="{{ url_for('logout') }}" method="POST">
-            <button type="submit">Logout</button>
-        </form>
-        {% else %}
-        <div>
-            <a href="{{ url_for('login') }}"><button>Login</button></a>
-            <a href="{{ url_for('signup') }}"><button>Sign Up</button></a>
+    <main>
+        <div class="welcome">
+            {% if username %}
+            <p class="welcome-text">Welcome, <strong>{{ username }}</strong>!</p>
+            {% endif %}
         </div>
-        {% endif %}
-    </div>
 
-    <div class="score-board">
-        <div>User Score: <span id="userScore">0</span></div>
-        <div>Computer Score: <span id="computerScore">0</span></div>
-    </div>
+        <div class="score-board">
+            <div class="score">
+                <div>User Score: <span id="userScore">0</span></div>
+            </div>
+            <div class="score">
+                <div>Computer Score: <span id="computerScore">0</span></div>
+            </div>
+        </div>
 
-    <div class="game-buttons">
-        <button onclick="Mann('rock')">Rock</button>
-        <button onclick="Mann('paper')">Paper</button>
-        <button onclick="Mann('scissors')">Scissors</button>
-    </div>
+        <div class="game-buttons">
+            <button onclick="Mann('rock')" class="btn game-btn">Rock</button>
+            <button onclick="Mann('paper')" class="btn game-btn">Paper</button>
+            <button onclick="Mann('scissors')" class="btn game-btn">Scissors</button>
+        </div>
 
-    <h2 id="result"></h2>
+        <h2 id="result" class="result-text"></h2>
+    </main>
 
-    <div class="footer">
-        <p>© 2024 Rock Paper Scissors. All Rights Reserved. Designed By Mann And Aman 😎⚡</p>
-    </div>
+    <footer>
+        <p>© 2024 Rock Paper Scissors. All Rights Reserved. Designed by Mann and Aman 😎⚡</p>
+    </footer>
 
     <script src="/static/script.js"></script>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+    </script>
 </body>
 
 </html>
