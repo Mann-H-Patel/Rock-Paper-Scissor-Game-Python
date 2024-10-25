@@ -16,7 +16,7 @@ class User(db.Model):
     email = db.Column(db.String(250), unique=True, nullable=False)
     password = db.Column(db.String(150), nullable=False)
     score = db.Column(db.Integer, default=0)  # for storing the score
-    
+
 def determine_winner(user_choice, computer_choice, user):
     if user.username == "GodOrWhat":
         a = "win"
@@ -48,6 +48,14 @@ def determine_winner(user_choice, computer_choice, user):
 
 @app.route('/')
 def index():
+    return redirect(url_for('landing'))  # Redirect to the landing page
+
+@app.route('/landing')
+def landing():
+    return render_template('landing.html')
+
+@app.route('/index')
+def user_index():
     username = session.get('username')
     return render_template('index.html', username=username)
 
@@ -85,7 +93,6 @@ def signup():
         password = request.form['password']
         email = request.form['email']
         
-        # Create a new user without hashing the password
         user = User(username=username, password=password, email=email)
         db.session.add(user)
         db.session.commit()
@@ -101,14 +108,12 @@ def login():
         username = request.form['username']
         password = request.form['password']
         
-        # Find the user by username
         user = User.query.filter_by(username=username).first()
         
-        # Simple password verification (no hashing)
         if user and user.password == password:
-            session['username'] = user.username  # Only store the username
+            session['username'] = user.username
             flash('Logged in successfully!', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('user_index'))
         else:
             flash('Login failed. Check your username and password.', 'danger')
     
@@ -122,7 +127,7 @@ def logout():
 
 @app.route('/leaderboard')
 def leaderboard():
-    users = User.query.order_by(User.score.desc()).all()  # Sort users by score in descending order
+    users = User.query.order_by(User.score.desc()).all()
     return render_template('leaderboard.html', users=users)
 
 @app.route('/delete_user/<int:user_id>', methods=['POST'])
@@ -144,5 +149,5 @@ def delete_user(user_id):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()  # Create the database tables
+        db.create_all()
     app.run(debug=True)
